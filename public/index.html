@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>완도섬부동산 매물</title>
+<style>
+  :root {
+    --bg: #f5f7f8; --card: #ffffff; --text: #1d2327; --muted: #66727a;
+    --line: #e2e7ea; --accent: #0f6e8c; --accent-soft: #e3f1f5;
+    --sale: #c2410c; --jeonse: #0f766e; --wolse: #6d28d9;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12171a; --card: #1b2226; --text: #e6ebee; --muted: #93a0a8;
+      --line: #2a3338; --accent: #5cc0dc; --accent-soft: #1d3440;
+      --sale: #fb923c; --jeonse: #2dd4bf; --wolse: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+    line-height: 1.5;
+  }
+  header { padding: 24px 16px 8px; max-width: 1080px; margin: 0 auto; }
+  h1 { margin: 0; font-size: 1.5rem; }
+  .sub { color: var(--muted); font-size: .9rem; margin-top: 4px; }
+  .filters {
+    max-width: 1080px; margin: 0 auto; padding: 12px 16px;
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  select {
+    font: inherit; padding: 8px 10px; border-radius: 8px;
+    border: 1px solid var(--line); background: var(--card); color: var(--text);
+  }
+  main {
+    max-width: 1080px; margin: 0 auto; padding: 8px 16px 40px;
+    display: grid; gap: 16px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  .card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px; display: flex; flex-direction: column; gap: 10px;
+  }
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .badge { font-size: .8rem; font-weight: 600; padding: 2px 8px; border-radius: 999px; border: 1px solid currentColor; }
+  .badge.매매 { color: var(--sale); } .badge.전세 { color: var(--jeonse); } .badge.월세 { color: var(--wolse); }
+  .code { color: var(--muted); font-size: .8rem; }
+  .title { font-size: 1.1rem; font-weight: 700; }
+  .price { font-size: 1.35rem; font-weight: 800; }
+  dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; font-size: .9rem; }
+  dt { color: var(--muted); } dd { margin: 0; }
+  button.vr {
+    margin-top: auto; font: inherit; font-weight: 600; cursor: pointer;
+    padding: 10px; border-radius: 8px; border: none;
+    background: var(--accent-soft); color: var(--accent);
+  }
+  .empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 40px 0; }
+  dialog {
+    width: min(960px, 100vw - 32px); height: min(640px, 100vh - 64px);
+    padding: 0; border: none; border-radius: 12px; background: #000;
+  }
+  dialog::backdrop { background: rgba(0,0,0,.6); }
+  dialog iframe { width: 100%; height: 100%; border: 0; display: block; }
+  dialog .close {
+    position: absolute; top: 8px; right: 8px; font: inherit; cursor: pointer;
+    border: none; border-radius: 8px; padding: 6px 12px; background: rgba(0,0,0,.6); color: #fff;
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>완도섬부동산 매물</h1>
+  <div class="sub" id="meta">불러오는 중…</div>
+</header>
+
+<div class="filters">
+  <select id="f-dong" aria-label="지역"><option value="">전체 지역</option></select>
+  <select id="f-type" aria-label="유형"><option value="">전체 유형</option></select>
+  <select id="f-deal" aria-label="거래"><option value="">전체 거래</option></select>
+</div>
+
+<main id="list"></main>
+
+<dialog id="viewer">
+  <iframe title="360° 매물 보기" allow="fullscreen; gyroscope; accelerometer"></iframe>
+  <button class="close" type="button">닫기</button>
+</dialog>
+
+<script>
+  // 가격 단위: 만원 (15000 → 1억 5,000만원)
+  function won(man) {
+    if (!man) return "0원";
+    const eok = Math.floor(man / 10000), rest = man % 10000;
+    return [eok && eok + "억", rest && rest.toLocaleString() + "만"].filter(Boolean).join(" ") + "원";
+  }
+  function priceText(l) {
+    if (l.deal === "월세") return `${won(l.price)} / 월 ${won(l.rent)}`;
+    return won(l.price);
+  }
+  function area(m2) {
+    return m2 ? `${m2}㎡ (${(m2 / 3.3058).toFixed(1)}평)` : "-";
+  }
+  function esc(s) {
+    return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+
+  const listEl = document.getElementById("list");
+  const filters = { dong: "f-dong", type: "f-type", deal: "f-deal" };
+  let listings = [];
+
+  function render() {
+    const sel = Object.fromEntries(Object.entries(filters).map(([k, id]) => [k, document.getElementById(id).value]));
+    const rows = listings.filter(l => Object.entries(sel).every(([k, v]) => !v || l[k] === v));
+    if (!rows.length) {
+      listEl.innerHTML = '<div class="empty">조건에 맞는 매물이 없습니다.</div>';
+      return;
+    }
+    listEl.innerHTML = rows.map(l => `
+      <article class="card">
+        <div class="top">
+          <span class="badge ${esc(l.deal)}">${esc(l.deal)}</span>
+          <span class="code">매물번호 ${esc(l.code)}</span>
+        </div>
+        <div class="title">${esc(l.dong)} ${esc(l.type)}</div>
+        <div class="price">${priceText(l)}</div>
+        <dl>
+          <dt>대지</dt><dd>${area(l.land)}</dd>
+          <dt>건물</dt><dd>${area(l.bldg)}</dd>
+          <dt>준공</dt><dd>${l.year ? esc(l.year) + "년" : "-"}</dd>
+          <dt>등기</dt><dd>${esc(l.reg) || "-"}</dd>
+        </dl>
+        ${l.kuula ? `<button class="vr" type="button" data-url="${esc(l.kuula)}">360° 매물 보기</button>` : ""}
+      </article>`).join("");
+  }
+
+  function fillOptions(key) {
+    const el = document.getElementById(filters[key]);
+    [...new Set(listings.map(l => l[key]).filter(Boolean))].sort()
+      .forEach(v => el.add(new Option(v, v)));
+    el.addEventListener("change", render);
+  }
+
+  const dialog = document.getElementById("viewer");
+  const frame = dialog.querySelector("iframe");
+  listEl.addEventListener("click", e => {
+    const btn = e.target.closest("button.vr");
+    if (!btn) return;
+    frame.src = btn.dataset.url;
+    dialog.showModal();
+  });
+  dialog.querySelector(".close").addEventListener("click", () => dialog.close());
+  dialog.addEventListener("close", () => { frame.src = "about:blank"; });
+
+  fetch("listings.json", { cache: "no-store" })
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(data => {
+      listings = data.listings || [];
+      document.getElementById("meta").textContent =
+        `매물 ${listings.length}건 · 최종 갱신 ${data.updated || "-"}`;
+      Object.keys(filters).forEach(fillOptions);
+      render();
+    })
+    .catch(err => {
+      document.getElementById("meta").textContent = "매물 데이터를 불러오지 못했습니다.";
+      console.error(err);
+    });
+</script>
+</body>
+</html>
