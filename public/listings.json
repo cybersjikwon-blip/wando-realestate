@@ -13,6 +13,19 @@
    "price": 15000,
    "rent": 0,
    "kuula": "https://kuula.co/share/collection/7d4nn?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
+  },
+  {
+   "code": "017820",
+   "dong": "완도읍",
+   "type": "아파트",
+   "land": 65,
+   "bldg": 25,
+   "reg": "등기",
+   "year": 2010,
+   "deal": "전세",
+   "price": 10000,
+   "rent": 0,
+   "kuula": "https://kuula.co/share/collection/7d4nn?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
   }
  ]
 }
