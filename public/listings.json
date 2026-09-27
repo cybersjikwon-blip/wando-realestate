@@ -5,25 +5,12 @@
    "code": "016542",
    "dong": "노화",
    "type": "아파트",
-   "land": 56,
-   "bldg": 30,
+   "land": 150,
+   "bldg": 35,
    "reg": "등기",
    "year": 2005,
    "deal": "매매",
    "price": 15000,
-   "rent": 0,
-   "kuula": "https://kuula.co/share/collection/7d4nn?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
-  },
-  {
-   "code": "017860",
-   "dong": "보길도",
-   "type": "주택",
-   "land": 100,
-   "bldg": 25,
-   "reg": "일부미등기",
-   "year": 1998,
-   "deal": "전세",
-   "price": 5000,
    "rent": 0,
    "kuula": "https://kuula.co/share/collection/7d4nn?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
   }
