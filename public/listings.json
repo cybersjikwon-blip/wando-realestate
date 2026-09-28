@@ -11,7 +11,8 @@
    "year": 1998,
    "deal": "매매",
    "price": 18000,
-   "rent": 0
+   "rent": 0,
+   "kuula": "https://kuula.co/share/collection/7d4nn?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
   },
   {
    "code": "02010002",
@@ -29,7 +30,7 @@
    "type": "전원주택",
    "land": 200,
    "bldg": 40,
-   "reg": "미등기",
+   "reg": "등기",
    "year": 2010,
    "deal": "연세",
    "price": 0,
@@ -53,7 +54,7 @@
    "type": "주택",
    "land": 90,
    "bldg": 22,
-   "reg": "일부미등기",
+   "reg": "등기",
    "year": 1985,
    "deal": "전세",
    "price": 5000,
