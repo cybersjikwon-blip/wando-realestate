@@ -46,7 +46,8 @@
    "year": 2015,
    "deal": "월세",
    "price": 2000,
-   "rent": 60
+   "rent": 60,
+   "kuula": "https://kuula.co/share/collection/7d4nn?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
   },
   {
    "code": "02010005",
