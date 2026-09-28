@@ -12,7 +12,7 @@
    "deal": "매매",
    "price": 18000,
    "rent": 0,
-   "kuula": "https://kuula.co/share/collection/7d4nn?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
+   "created": "2026-09-28"
   },
   {
    "code": "02010002",
@@ -22,7 +22,8 @@
    "reg": "등기",
    "deal": "매매",
    "price": 6000,
-   "rent": 0
+   "rent": 0,
+   "created": "2026-09-28"
   },
   {
    "code": "02010003",
@@ -30,11 +31,12 @@
    "type": "전원주택",
    "land": 200,
    "bldg": 40,
-   "reg": "등기",
+   "reg": "미등기",
    "year": 2010,
    "deal": "연세",
    "price": 0,
-   "rent": 450
+   "rent": 450,
+   "created": "2026-09-28"
   },
   {
    "code": "02010004",
@@ -47,7 +49,7 @@
    "deal": "월세",
    "price": 2000,
    "rent": 60,
-   "kuula": "https://kuula.co/share/collection/7d4nn?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
+   "created": "2026-09-28"
   },
   {
    "code": "02010005",
@@ -55,20 +57,15 @@
    "type": "주택",
    "land": 90,
    "bldg": 22,
-   "reg": "등기",
+   "reg": "일부미등기",
    "year": 1985,
    "deal": "전세",
    "price": 5000,
-   "rent": 0
+   "rent": 0,
+   "created": "2026-09-28"
   }
  ],
  "office": {
-  "name": "완도섬부동산",
-  "tel": "061-554-9800",
-  "addr": "전라남도 완도군 완도읍 개포로62번길 25",
-  "regno": "제46890-2025-00001호",
-  "rep": "양명숙",
-  "youtube": "https://www.youtube.com/@%EC%99%84%EB%8F%84%EB%B6%80%EB%8F%99%EC%82%B0",
-  "cafe": "cafe.naver.com/wandoproperty"
+  "name": "완도섬부동산"
  }
 }
