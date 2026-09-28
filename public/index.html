@@ -185,7 +185,7 @@
     position: absolute; top: 14px; left: 14px; color: #fff; font-weight: 900; font-size: .9rem;
     padding: 5px 14px; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,.2);
   }
-  .deal.매매 { background: var(--sale); } .deal.전세 { background: var(--jeonse); } .deal.월세 { background: var(--wolse); }
+  .deal.매매 { background: var(--sale); } .deal.전세 { background: var(--jeonse); } .deal.월세, .deal.연세 { background: var(--wolse); }
   .vr-pill {
     position: absolute; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 6px;
     background: rgba(11,31,61,.75); color: #fff; font-weight: 700; font-size: .8rem;
@@ -393,11 +393,13 @@
     return [eok && eok + "억", rest && rest.toLocaleString() + "만"].filter(Boolean).join(" ") + "원";
   }
   function priceHtml(l) {
-    if (l.deal === "월세") return `<small>보증금</small>${won(l.price)}<br><small>월세</small>${won(l.rent)}`;
+    if (l.deal === "월세" || l.deal === "연세")
+      return `<small>보증금</small>${won(l.price)}<br><small>${esc(l.deal)}</small>${won(l.rent)}`;
     return `<small>${esc(l.deal)}</small>${won(l.price)}`;
   }
-  function area(m2) {
-    return m2 ? `${m2}㎡ · ${(m2 / 3.3058).toFixed(1)}평` : "-";
+  // 면적 단위: 평 (매물관리 페이지 입력 기준)
+  function area(py) {
+    return py ? `${py}평 · ${(py * 3.3058).toFixed(1)}㎡` : "-";
   }
   function esc(s) {
     return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
