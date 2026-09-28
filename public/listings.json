@@ -1,31 +1,42 @@
 {
- "updated": "2026-09-27",
+ "updated": "2026-09-28",
  "listings": [
   {
-   "code": "016542",
-   "dong": "노화",
-   "type": "아파트",
-   "land": 150,
-   "bldg": 35,
+   "code": "02010001",
+   "dong": "완도읍",
+   "type": "주택",
+   "land": 120,
+   "bldg": 32,
    "reg": "등기",
-   "year": 2005,
+   "year": 1998,
    "deal": "매매",
-   "price": 15000,
-   "rent": 0,
-   "kuula": "https://kuula.co/share/collection/7d4nn?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
+   "price": 18000,
+   "rent": 0
   },
   {
-   "code": "017820",
-   "dong": "완도읍",
-   "type": "아파트",
-   "land": 65,
-   "bldg": 25,
+   "code": "02010002",
+   "dong": "노화읍",
+   "type": "토지",
+   "land": 300,
    "reg": "등기",
+   "deal": "매매",
+   "price": 6000,
+   "rent": 0
+  },
+  {
+   "code": "02010003",
+   "dong": "보길면",
+   "type": "전원주택",
+   "land": 200,
+   "bldg": 40,
+   "reg": "미등기",
    "year": 2010,
-   "deal": "전세",
-   "price": 10000,
-   "rent": 0,
-   "kuula": "https://kuula.co/share/collection/7d4nn?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
+   "deal": "연세",
+   "price": 0,
+   "rent": 450
   }
- ]
+ ],
+ "office": {
+  "name": "완도섬부동산"
+ }
 }
