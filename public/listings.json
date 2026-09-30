@@ -91,8 +91,7 @@
    "deal": "매매",
    "price": 23500,
    "rent": 0,
-   "created": "2026-09-30",
-   "kuula": "https://kuula.co/post/..."
+   "created": "2026-09-30"
   },
   {
    "code": "2026-02",
@@ -105,7 +104,7 @@
    "price": 49000,
    "rent": 0,
    "created": "2026-09-30",
-   "kuula": "https://kuula.co/post/..."
+   "kuula": "https://kuula.co/share/collection/7MxwD?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
   },
   {
    "code": "2026-03",
@@ -117,7 +116,7 @@
    "price": 12000,
    "rent": 0,
    "created": "2026-09-30",
-   "kuula": "https://kuula.co/post/..."
+   "kuula": "https://kuula.co/share/collection/7TJyQ?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
   },
   {
    "code": "2026-05",
@@ -129,7 +128,7 @@
    "price": 12500,
    "rent": 0,
    "created": "2026-09-30",
-   "kuula": "https://kuula.co/post/..."
+   "kuula": "https://kuula.co/share/collection/7MD0c?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
   },
   {
    "code": "2026-06",
@@ -142,7 +141,7 @@
    "price": 82000,
    "rent": 0,
    "created": "2026-09-30",
-   "kuula": "https://kuula.co/post/..."
+   "kuula": "https://kuula.co/share/collection/7T2Dd?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
   },
   {
    "code": "2026-07",
@@ -155,7 +154,7 @@
    "price": 0,
    "rent": 0,
    "created": "2026-09-30",
-   "kuula": "https://kuula.co/post/..."
+   "kuula": "https://kuula.co/share/collection/7Mnxv?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
   },
   {
    "code": "2026-08",
@@ -166,8 +165,7 @@
    "deal": "매매",
    "price": 0,
    "rent": 0,
-   "created": "2026-09-30",
-   "kuula": "https://kuula.co/post/..."
+   "created": "2026-09-30"
   },
   {
    "code": "2026-09",
@@ -180,7 +178,7 @@
    "price": 28000,
    "rent": 0,
    "created": "2026-09-30",
-   "kuula": "https://kuula.co/post/..."
+   "kuula": "https://kuula.co/share/collection/7MxwD?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
   },
   {
    "code": "2026-11",
@@ -191,8 +189,7 @@
    "deal": "매매",
    "price": 0,
    "rent": 0,
-   "created": "2026-09-30",
-   "kuula": "https://kuula.co/post/..."
+   "created": "2026-09-30"
   }
  ],
  "office": {
