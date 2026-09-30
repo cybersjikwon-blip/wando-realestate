@@ -155,6 +155,9 @@
    "land": 50,
    "bldg": 80,
    "reg": "등기",
+   "photos": [
+    "public/photos/d42ccfce615c.jpg"
+   ],
    "deal": "매매",
    "price": 82000,
    "rent": 0,
