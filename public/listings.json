@@ -38,7 +38,12 @@
    "deal": "연세",
    "price": 0,
    "rent": 450,
-   "created": "2026-09-28"
+   "created": "2026-09-28",
+   "feat": {
+    "rank": 4,
+    "badge": "추천",
+    "headline": ""
+   }
   },
   {
    "code": "02010004",
@@ -100,11 +105,19 @@
    "bldg": 55,
    "reg": "등기",
    "year": 2023,
+   "photos": [
+    "public/photos/bfad1539480d.jpg"
+   ],
    "deal": "매매",
    "price": 49000,
    "rent": 0,
    "created": "2026-09-30",
-   "kuula": "https://kuula.co/share/collection/7MxwD?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
+   "kuula": "https://kuula.co/share/collection/7MxwD?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0",
+   "feat": {
+    "rank": 1,
+    "badge": "추천",
+    "headline": ""
+   }
   },
   {
    "code": "2026-03",
@@ -128,7 +141,12 @@
    "price": 12500,
    "rent": 0,
    "created": "2026-09-30",
-   "kuula": "https://kuula.co/share/collection/7MD0c?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
+   "kuula": "https://kuula.co/share/collection/7MD0c?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0",
+   "feat": {
+    "rank": 3,
+    "badge": "추천",
+    "headline": ""
+   }
   },
   {
    "code": "2026-06",
@@ -141,7 +159,12 @@
    "price": 82000,
    "rent": 0,
    "created": "2026-09-30",
-   "kuula": "https://kuula.co/share/collection/7T2Dd?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
+   "kuula": "https://kuula.co/share/collection/7T2Dd?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0",
+   "feat": {
+    "rank": 2,
+    "badge": "추천",
+    "headline": ""
+   }
   },
   {
    "code": "2026-07",
