@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-29",
+ "updated": "2026-09-30",
  "listings": [
   {
    "code": "02010001",
@@ -66,6 +66,21 @@
    "price": 5000,
    "rent": 0,
    "created": "2026-09-28"
+  },
+  {
+   "code": "0201006",
+   "dong": "생일면",
+   "type": "창고",
+   "land": 150,
+   "bldg": 60,
+   "reg": "미등기",
+   "year": 2012,
+   "jimok": "임야",
+   "roadAccess": "접함",
+   "deal": "매매",
+   "price": 8000,
+   "rent": 0,
+   "created": "2026-09-30"
   }
  ],
  "office": {
