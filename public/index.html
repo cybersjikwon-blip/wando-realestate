@@ -1,0 +1,537 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>완도 섬 부동산 | 섬에서 살아가는 삶</title>
+<meta name="description" content="섬에서 살아가는 삶, 전원주택의 여유, 바다와 함께하는 귀농의 꿈. 완도 섬 부동산 매물과 360° VR 투어.">
+<meta property="og:title" content="완도 섬 부동산">
+<meta property="og:description" content="섬에서 살아가는 삶, 전원주택의 여유, 바다와 함께하는 귀농의 꿈.">
+<meta property="og:image" content="logo.png">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Nanum+Brush+Script&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #16335c;
+    --navy-deep: #0b1f3d;
+    --sea: #0a84c6;
+    --sea-light: #3fb6e8;
+    --sky: #bfe7fb;
+    --leaf: #2f8f3a;
+    --leaf-light: #6cc04a;
+    --sand: #fff8ec;
+    --text: #1b2a3d;
+    --muted: #5d6d80;
+    --card: #ffffff;
+    --line: #e3ecf4;
+    --sale: #e8590c;
+    --jeonse: #0c9d8a;
+    --wolse: #7048e8;
+    --shadow: 0 10px 30px rgba(15, 55, 100, .12);
+    --shadow-lg: 0 24px 50px rgba(15, 55, 100, .22);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; color: var(--text); background: #f3f8fc;
+    font-family: "Noto Sans KR", -apple-system, "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+    line-height: 1.6; overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 16px; }
+
+  /* ---------- 상단 바 ---------- */
+  .nav {
+    position: fixed; inset: 0 0 auto 0; z-index: 50;
+    transition: background .3s, box-shadow .3s;
+  }
+  .nav.scrolled { background: rgba(255,255,255,.92); backdrop-filter: blur(10px); box-shadow: 0 2px 16px rgba(0,0,0,.08); }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: "Black Han Sans", sans-serif; font-size: 1.25rem; color: #fff; transition: color .3s; }
+  .nav.scrolled .brand { color: var(--navy); }
+  .brand img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 8px rgba(0,0,0,.2); }
+  .brand .seom { font-family: "Nanum Brush Script", cursive; color: var(--leaf-light); font-size: 1.7rem; line-height: 1; }
+  .nav.scrolled .brand .seom { color: var(--leaf); }
+  .nav-links { display: flex; gap: 6px; }
+  .nav-links a {
+    font-weight: 700; font-size: .9rem; padding: 8px 14px; border-radius: 999px;
+    color: #fff; background: rgba(255,255,255,.18); transition: background .2s;
+  }
+  .nav.scrolled .nav-links a { color: var(--navy); background: #eef5fb; }
+  .nav-links a:hover { background: rgba(255,255,255,.32); }
+  @media (max-width: 640px) { .nav-links .hide-m { display: none; } }
+
+  /* ---------- 히어로 ---------- */
+  .hero {
+    position: relative; min-height: 640px; padding: 110px 0 170px; color: #fff; text-align: center;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(255,255,255,.5), transparent 45%),
+      linear-gradient(180deg, #5cc4f2 0%, #2ea3de 40%, #0a84c6 72%, #06679f 100%);
+    overflow: hidden;
+  }
+  .sun {
+    position: absolute; top: 70px; right: 12%; width: 120px; height: 120px; border-radius: 50%;
+    background: radial-gradient(circle, #fffbe6 0%, #ffe9a3 45%, rgba(255,233,163,0) 70%);
+    animation: glow 6s ease-in-out infinite;
+  }
+  @keyframes glow { 50% { transform: scale(1.12); opacity: .85; } }
+  .cloud { position: absolute; background: #fff; border-radius: 999px; opacity: .85; filter: blur(1px); animation: drift linear infinite; }
+  .cloud::before, .cloud::after { content: ""; position: absolute; background: #fff; border-radius: 50%; }
+  .cloud.c1 { width: 140px; height: 36px; top: 120px; left: -160px; animation-duration: 55s; }
+  .cloud.c1::before { width: 60px; height: 60px; top: -30px; left: 24px; }
+  .cloud.c1::after { width: 44px; height: 44px; top: -20px; left: 70px; }
+  .cloud.c2 { width: 100px; height: 26px; top: 210px; left: -120px; animation-duration: 75s; animation-delay: -30s; opacity: .7; }
+  .cloud.c2::before { width: 44px; height: 44px; top: -22px; left: 16px; }
+  .cloud.c2::after { width: 32px; height: 32px; top: -14px; left: 50px; }
+  @keyframes drift { to { transform: translateX(calc(100vw + 320px)); } }
+  .gull { position: absolute; width: 34px; animation: fly 9s ease-in-out infinite; }
+  .gull.g1 { top: 150px; left: 14%; }
+  .gull.g2 { top: 110px; left: 22%; width: 24px; animation-delay: -3s; }
+  .gull.g3 { top: 230px; right: 20%; width: 28px; animation-delay: -5s; }
+  @keyframes fly { 50% { transform: translate(18px, -14px) rotate(-4deg); } }
+
+  .logo-ring {
+    position: relative; width: 200px; height: 200px; margin: 0 auto 22px; border-radius: 50%;
+    padding: 6px; background: conic-gradient(from 0deg, #fff, var(--sky), var(--leaf-light), #fff, var(--sea-light), #fff);
+    box-shadow: 0 0 0 10px rgba(255,255,255,.18), 0 20px 50px rgba(0,40,80,.35);
+    animation: float 5s ease-in-out infinite;
+  }
+  .logo-ring img { width: 100%; height: 100%; border-radius: 50%; display: block; border: 4px solid #fff; }
+  @keyframes float { 50% { transform: translateY(-10px); } }
+
+  .hero h1 {
+    margin: 0; font-family: "Black Han Sans", sans-serif; font-weight: 400;
+    font-size: clamp(2.6rem, 9vw, 4.6rem); letter-spacing: .02em; line-height: 1.1;
+    text-shadow: 0 4px 0 var(--navy), 0 10px 30px rgba(0,30,70,.45);
+  }
+  .hero h1 .seom {
+    font-family: "Nanum Brush Script", cursive; font-size: 1.55em; color: #8be05f;
+    display: inline-block; transform: rotate(-6deg) translateY(4px); margin: 0 .08em;
+    text-shadow: 0 3px 0 #1d5e27, 0 8px 24px rgba(0,50,20,.5);
+  }
+  .tagline {
+    margin: 18px auto 0; max-width: 560px; font-size: clamp(1rem, 3.6vw, 1.2rem); font-weight: 500;
+    text-shadow: 0 2px 10px rgba(0,30,70,.4);
+  }
+  .tagline b { color: #fff6c7; }
+  .cta { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px; cursor: pointer; border: none;
+    font: inherit; font-weight: 700; font-size: 1rem; padding: 14px 24px; border-radius: 999px;
+    transition: transform .2s, box-shadow .2s;
+  }
+  .btn:hover { transform: translateY(-3px); }
+  .btn svg { width: 20px; height: 20px; flex: none; }
+  .btn-main { background: linear-gradient(135deg, #ffd43b, #ffa94d); color: var(--navy-deep); box-shadow: 0 8px 24px rgba(255,169,77,.5); }
+  .btn-yt { background: #ff0033; color: #fff; box-shadow: 0 8px 24px rgba(255,0,51,.35); }
+  .btn-cafe { background: #03c75a; color: #fff; box-shadow: 0 8px 24px rgba(3,199,90,.35); }
+
+  .waves { position: absolute; left: 0; right: 0; bottom: -1px; height: 150px; }
+  .waves svg { position: absolute; bottom: 0; width: 200%; height: 100%; }
+  .waves .w1 { animation: wave 14s linear infinite; opacity: .35; }
+  .waves .w2 { animation: wave 9s linear infinite reverse; opacity: .55; }
+  .waves .w3 { animation: wave 18s linear infinite; }
+  @keyframes wave { to { transform: translateX(-50%); } }
+  .island { position: absolute; bottom: 70px; width: 100%; height: 90px; }
+
+  /* ---------- 통계 ---------- */
+  .stats {
+    position: relative; z-index: 2; margin-top: -60px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  }
+  .stat {
+    background: var(--card); border-radius: 18px; padding: 18px 12px; text-align: center; box-shadow: var(--shadow);
+    border-top: 4px solid var(--sea);
+  }
+  .stat:nth-child(2) { border-top-color: var(--leaf-light); }
+  .stat:nth-child(3) { border-top-color: #ffa94d; }
+  .stat .num { font-family: "Black Han Sans", sans-serif; font-size: clamp(1.6rem, 6vw, 2.2rem); color: var(--navy); line-height: 1.2; }
+  .stat .lbl { font-size: .85rem; color: var(--muted); font-weight: 500; }
+
+  /* ---------- 섹션 공통 ---------- */
+  section { padding: 64px 0 24px; }
+  .sec-head { text-align: center; margin-bottom: 28px; }
+  .sec-head .eyebrow { display: inline-block; font-weight: 700; font-size: .85rem; color: var(--sea); background: #e1f3fc; padding: 4px 14px; border-radius: 999px; }
+  .sec-head h2 { margin: 10px 0 4px; font-family: "Black Han Sans", sans-serif; font-weight: 400; font-size: clamp(1.8rem, 6vw, 2.4rem); color: var(--navy); }
+  .sec-head h2 .seom { font-family: "Nanum Brush Script", cursive; color: var(--leaf); font-size: 1.4em; }
+  .sec-head p { margin: 0; color: var(--muted); }
+
+  /* ---------- 필터 ---------- */
+  .filters { display: flex; flex-direction: column; gap: 10px; align-items: center; margin-bottom: 28px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+  .chip {
+    font: inherit; font-weight: 700; font-size: .9rem; cursor: pointer;
+    padding: 8px 16px; border-radius: 999px; border: 2px solid var(--line); background: #fff; color: var(--muted);
+    transition: all .2s;
+  }
+  .chip:hover { border-color: var(--sea-light); color: var(--sea); }
+  .chip.on { background: linear-gradient(135deg, var(--sea), var(--navy)); border-color: transparent; color: #fff; box-shadow: 0 6px 16px rgba(10,132,198,.35); }
+
+  /* ---------- 매물 카드 ---------- */
+  .grid { display: grid; gap: 22px; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
+  .card {
+    background: var(--card); border-radius: 22px; overflow: hidden; box-shadow: var(--shadow);
+    display: flex; flex-direction: column; transition: transform .3s, box-shadow .3s;
+    animation: rise .6s both;
+  }
+  .card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+  @keyframes rise { from { opacity: 0; transform: translateY(24px); } }
+  .thumb { position: relative; height: 170px; overflow: hidden; cursor: pointer; }
+  .thumb svg.scene { position: absolute; inset: 0; width: 100%; height: 100%; transition: transform .6s; }
+  .card:hover .thumb svg.scene { transform: scale(1.06); }
+  .deal {
+    position: absolute; top: 14px; left: 14px; color: #fff; font-weight: 900; font-size: .9rem;
+    padding: 5px 14px; border-radius: 999px; box-shadow: 0 4px 12px rgba(0,0,0,.2);
+  }
+  .deal.매매 { background: var(--sale); } .deal.전세 { background: var(--jeonse); } .deal.월세, .deal.연세 { background: var(--wolse); }
+  .vr-pill {
+    position: absolute; right: 14px; bottom: 14px; display: flex; align-items: center; gap: 6px;
+    background: rgba(11,31,61,.75); color: #fff; font-weight: 700; font-size: .8rem;
+    padding: 6px 12px; border-radius: 999px; backdrop-filter: blur(4px);
+  }
+  .vr-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: #ff4d6d; animation: pulse 1.4s infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,77,109,.7); } 100% { box-shadow: 0 0 0 10px rgba(255,77,109,0); } }
+  .code-tag { position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,.9); color: var(--navy); font-size: .75rem; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+  .body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 12px; flex: 1; }
+  .loc { display: flex; align-items: center; gap: 6px; color: var(--sea); font-weight: 700; font-size: .9rem; }
+  .loc svg { width: 16px; height: 16px; }
+  .title { font-size: 1.2rem; font-weight: 900; color: var(--navy); margin-top: -6px; }
+  .price { font-family: "Black Han Sans", sans-serif; font-size: 1.7rem; line-height: 1.2; color: var(--navy-deep); }
+  .price small { font-family: "Noto Sans KR", sans-serif; font-size: .8rem; color: var(--muted); font-weight: 500; margin-right: 6px; }
+  .specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .spec { background: #f3f8fc; border-radius: 12px; padding: 8px 10px; }
+  .spec .k { font-size: .72rem; color: var(--muted); font-weight: 500; }
+  .spec .v { font-size: .92rem; font-weight: 700; color: var(--text); }
+  .card .btn { justify-content: center; margin-top: auto; width: 100%; padding: 12px; font-size: .95rem; background: linear-gradient(135deg, var(--sea-light), var(--sea)); color: #fff; box-shadow: 0 6px 16px rgba(10,132,198,.3); }
+  .empty { grid-column: 1 / -1; text-align: center; color: var(--muted); padding: 48px 0; font-weight: 500; }
+
+  /* ---------- 특징 ---------- */
+  .features { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .feat {
+    border-radius: 22px; padding: 28px 24px; color: #fff; position: relative; overflow: hidden; box-shadow: var(--shadow);
+  }
+  .feat::after { content: ""; position: absolute; right: -30px; bottom: -30px; width: 130px; height: 130px; border-radius: 50%; background: rgba(255,255,255,.15); }
+  .feat.f1 { background: linear-gradient(135deg, #3fb6e8, #0a5fa0); }
+  .feat.f2 { background: linear-gradient(135deg, #6cc04a, #1f7a3a); }
+  .feat.f3 { background: linear-gradient(135deg, #ffb35c, #e8590c); }
+  .feat .ico { font-size: 2.4rem; line-height: 1; }
+  .feat h3 { margin: 12px 0 6px; font-size: 1.25rem; font-weight: 900; }
+  .feat p { margin: 0; opacity: .92; font-size: .95rem; }
+
+  /* ---------- 채널 배너 ---------- */
+  .channel {
+    margin-top: 40px; border-radius: 28px; padding: 36px 24px; text-align: center; color: #fff;
+    background:
+      radial-gradient(circle at 85% 20%, rgba(108,192,74,.45), transparent 40%),
+      linear-gradient(135deg, var(--navy-deep), var(--navy) 55%, var(--sea));
+    box-shadow: var(--shadow-lg); position: relative; overflow: hidden;
+  }
+  .channel img { width: 92px; height: 92px; border-radius: 50%; border: 4px solid #fff; box-shadow: 0 8px 20px rgba(0,0,0,.3); }
+  .channel h2 { margin: 12px 0 4px; font-family: "Black Han Sans", sans-serif; font-weight: 400; font-size: clamp(1.6rem, 5.5vw, 2.2rem); }
+  .channel p { margin: 0 auto; max-width: 520px; opacity: .9; }
+  .channel .cta { margin-top: 22px; }
+
+  footer { margin-top: 64px; background: var(--navy-deep); color: #b8c7da; padding: 32px 0 96px; font-size: .88rem; text-align: center; }
+  footer .brand { justify-content: center; color: #fff; margin-bottom: 8px; }
+  footer a { text-decoration: underline; }
+
+  /* ---------- 플로팅 버튼 ---------- */
+  .fab {
+    position: fixed; right: 16px; bottom: 16px; z-index: 40; display: flex; align-items: center; gap: 8px;
+    background: #ff0033; color: #fff; font-weight: 900; padding: 12px 18px; border-radius: 999px;
+    box-shadow: 0 10px 26px rgba(255,0,51,.45); animation: bob 3s ease-in-out infinite;
+  }
+  .fab svg { width: 22px; height: 22px; }
+  @keyframes bob { 50% { transform: translateY(-5px); } }
+
+  /* ---------- 360° 뷰어 ---------- */
+  dialog {
+    width: min(1000px, 100vw - 24px); height: min(680px, 100vh - 48px);
+    padding: 0; border: none; border-radius: 20px; background: #000; overflow: hidden;
+  }
+  dialog::backdrop { background: rgba(6,20,40,.75); backdrop-filter: blur(4px); }
+  dialog iframe { width: 100%; height: 100%; border: 0; display: block; }
+  dialog .close {
+    position: absolute; top: 10px; right: 10px; font: inherit; font-weight: 700; cursor: pointer;
+    border: none; border-radius: 999px; padding: 8px 16px; background: rgba(255,255,255,.92); color: var(--navy);
+  }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .8s, transform .8s; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-yt" viewBox="0 0 24 24"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.6 15.6V8.4l6.3 3.6-6.3 3.6Z"/></symbol>
+  <symbol id="i-cafe" viewBox="0 0 24 24"><path fill="currentColor" d="M16.3 12.8 7.4 0H0v24h7.7V11.2L16.6 24H24V0h-7.7z"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3 2 11h3v9h5v-6h4v6h5v-9h3z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></symbol>
+  <symbol id="i-360" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M3 12c0 2.5 4 4.5 9 4.5s9-2 9-4.5-4-4.5-9-4.5M12 7.5c-5 0-9 2-9 4.5"/><path fill="currentColor" d="M10 14l3 2.5-3 2.5z"/></symbol>
+  <symbol id="gull" viewBox="0 0 40 16"><path fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" d="M2 10c6-8 12-8 18 0 6-8 12-8 18 0"/></symbol>
+</svg>
+
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="logo.png" alt="">완도 <span class="seom">섬</span> 부동산</a>
+    <div class="nav-links">
+      <a href="#listings">매물</a>
+      <a class="hide-m" href="#about">소개</a>
+      <a href="#channel">채널</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="sun"></div>
+  <div class="cloud c1"></div>
+  <div class="cloud c2"></div>
+  <svg class="gull g1"><use href="#gull"/></svg>
+  <svg class="gull g2"><use href="#gull"/></svg>
+  <svg class="gull g3"><use href="#gull"/></svg>
+
+  <div class="wrap" style="position:relative;z-index:2">
+    <div class="logo-ring"><img src="logo.png" alt="완도 섬 부동산 로고"></div>
+    <h1>완도 <span class="seom">섬</span> 부동산</h1>
+    <p class="tagline">섬에서 살아가는 삶, <b>전원주택의 여유</b>,<br>바다와 함께하는 <b>귀농의 꿈</b>.</p>
+    <div class="cta">
+      <a class="btn btn-main" href="#listings"><svg><use href="#i-home"/></svg>매물 둘러보기</a>
+      <a class="btn btn-yt" href="https://www.youtube.com/@%EC%99%84%EB%8F%84%EB%B6%80%EB%8F%99%EC%82%B0" target="_blank" rel="noopener"><svg><use href="#i-yt"/></svg>유튜브 영상</a>
+    </div>
+  </div>
+
+  <svg class="island" viewBox="0 0 1200 90" preserveAspectRatio="none" aria-hidden="true">
+    <path fill="#1f7a3a" opacity=".55" d="M0 90 C120 40 200 30 300 60 S470 90 520 90Z"/>
+    <path fill="#2f8f3a" opacity=".75" d="M700 90 C780 20 880 10 960 45 S1100 70 1200 55 V90Z"/>
+    <path fill="#49a640" d="M820 90 C880 55 940 50 1000 70 S1080 90 1120 90Z"/>
+  </svg>
+  <div class="waves" aria-hidden="true">
+    <svg class="w1" viewBox="0 0 2400 150" preserveAspectRatio="none"><path fill="#fff" d="M0 70 Q150 20 300 70 T600 70 T900 70 T1200 70 T1500 70 T1800 70 T2100 70 T2400 70 V150 H0Z"/></svg>
+    <svg class="w2" viewBox="0 0 2400 150" preserveAspectRatio="none"><path fill="#fff" d="M0 95 Q200 50 400 95 T800 95 T1200 95 T1600 95 T2000 95 T2400 95 V150 H0Z"/></svg>
+    <svg class="w3" viewBox="0 0 2400 150" preserveAspectRatio="none"><path fill="#f3f8fc" d="M0 115 Q150 90 300 115 T600 115 T900 115 T1200 115 T1500 115 T1800 115 T2100 115 T2400 115 V150 H0Z"/></svg>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat"><div class="num" id="s-total">0</div><div class="lbl">등록 매물</div></div>
+    <div class="stat"><div class="num" id="s-area">0</div><div class="lbl">섬·읍면 지역</div></div>
+    <div class="stat"><div class="num" id="s-vr">0</div><div class="lbl">360° VR 투어</div></div>
+  </div>
+</div>
+
+<section id="listings">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">LISTINGS</span>
+      <h2>지금 만나는 <span class="seom">섬</span> 매물</h2>
+      <p id="meta">매물 정보를 불러오는 중…</p>
+    </div>
+    <div class="filters">
+      <div class="chips" data-key="deal"></div>
+      <div class="chips" data-key="dong"></div>
+      <div class="chips" data-key="type"></div>
+    </div>
+    <div class="grid" id="list"></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">WHY WANDO</span>
+      <h2>완도에서 시작하는 새로운 삶</h2>
+      <p>바다와 섬, 그리고 여유가 있는 곳</p>
+    </div>
+    <div class="features">
+      <div class="feat f1 reveal"><div class="ico">🏝️</div><h3>섬에서 살아가는 삶</h3><p>노화·보길·청산 등 완도의 크고 작은 섬마을 매물을 직접 발로 뛰어 소개합니다.</p></div>
+      <div class="feat f2 reveal"><div class="ico">🏡</div><h3>전원주택의 여유</h3><p>텃밭과 마당이 있는 집, 바다가 보이는 집. 도시에서 꿈꾸던 전원생활을 찾아드립니다.</p></div>
+      <div class="feat f3 reveal"><div class="ico">🌊</div><h3>바다와 함께하는 귀농·귀어</h3><p>귀농·귀어를 준비하는 분들께 토지·주택부터 지역 정보까지 함께 안내합니다.</p></div>
+    </div>
+
+    <div class="channel reveal" id="channel">
+      <img src="logo.png" alt="">
+      <h2>유튜브 @완도부동산</h2>
+      <p>매물 현장을 영상으로 먼저 확인하세요.<br>구독하시면 새 매물 소식을 가장 빨리 받아보실 수 있습니다.</p>
+      <div class="cta">
+        <a class="btn btn-yt" href="https://www.youtube.com/@%EC%99%84%EB%8F%84%EB%B6%80%EB%8F%99%EC%82%B0" target="_blank" rel="noopener"><svg><use href="#i-yt"/></svg>구독하러 가기</a>
+        <a class="btn btn-cafe" href="https://cafe.naver.com/wandoproperty" target="_blank" rel="noopener"><svg><use href="#i-cafe"/></svg>네이버 카페</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand"><img src="logo.png" alt="">완도 <span class="seom">섬</span> 부동산</div>
+    <div>섬에서 살아가는 삶, 전원주택의 여유, 바다와 함께하는 귀농의 꿈.</div>
+    <div style="margin-top:8px">
+      <a href="https://www.youtube.com/@%EC%99%84%EB%8F%84%EB%B6%80%EB%8F%99%EC%82%B0" target="_blank" rel="noopener">YouTube</a> ·
+      <a href="https://cafe.naver.com/wandoproperty" target="_blank" rel="noopener">네이버 카페</a>
+    </div>
+  </div>
+</footer>
+
+<a class="fab" href="https://www.youtube.com/@%EC%99%84%EB%8F%84%EB%B6%80%EB%8F%99%EC%82%B0" target="_blank" rel="noopener"><svg><use href="#i-yt"/></svg>영상 보기</a>
+
+<dialog id="viewer">
+  <iframe title="360° 매물 보기" allow="fullscreen; gyroscope; accelerometer"></iframe>
+  <button class="close" type="button">✕ 닫기</button>
+</dialog>
+
+<script>
+  // 가격 단위: 만원 (15000 → 1억 5,000만원)
+  function won(man) {
+    if (!man) return "0원";
+    const eok = Math.floor(man / 10000), rest = man % 10000;
+    return [eok && eok + "억", rest && rest.toLocaleString() + "만"].filter(Boolean).join(" ") + "원";
+  }
+  function priceHtml(l) {
+    if (l.deal === "월세" || l.deal === "연세")
+      return `<small>보증금</small>${won(l.price)}<br><small>${esc(l.deal)}</small>${won(l.rent)}`;
+    return `<small>${esc(l.deal)}</small>${won(l.price)}`;
+  }
+  // 면적 단위: 평 (매물관리 페이지 입력 기준)
+  function area(py) {
+    return py ? `${py}평 · ${(py * 3.3058).toFixed(1)}㎡` : "-";
+  }
+  function esc(s) {
+    return String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  }
+
+  // 사진이 없는 매물용 일러스트 (매물 유형별 하늘·바다 풍경)
+  const palettes = [
+    ["#8fd8ff", "#2ea3de", "#0a84c6"],
+    ["#ffd6a5", "#7cc6ee", "#1a7fc0"],
+    ["#c3f0ff", "#48b8e8", "#0e6fa8"],
+  ];
+  function scene(l, i) {
+    const [sky, sea, deep] = palettes[i % palettes.length];
+    const apt = l.type === "아파트";
+    const building = apt
+      ? `<g transform="translate(200 38)">
+           <rect x="0" y="0" width="56" height="92" rx="4" fill="#fff"/>
+           <rect x="62" y="22" width="44" height="70" rx="4" fill="#eef6fb"/>
+           ${[0,1,2,3,4].map(r => [0,1,2].map(c => `<rect x="${8+c*16}" y="${8+r*16}" width="9" height="9" rx="1.5" fill="${sea}"/>`).join("")).join("")}
+           ${[0,1,2,3].map(r => [0,1].map(c => `<rect x="${70+c*16}" y="${30+r*15}" width="9" height="9" rx="1.5" fill="${sea}" opacity=".8"/>`).join("")).join("")}
+         </g>`
+      : `<g transform="translate(205 58)">
+           <path d="M0 34 L42 0 L84 34Z" fill="#16335c"/>
+           <rect x="10" y="34" width="64" height="44" fill="#fff"/>
+           <rect x="34" y="50" width="16" height="28" fill="${sea}"/>
+           <rect x="16" y="44" width="12" height="12" fill="${sky}"/><rect x="56" y="44" width="12" height="12" fill="${sky}"/>
+         </g>`;
+    return `<svg class="scene" viewBox="0 0 400 170" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <defs><linearGradient id="sk${i}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${sky}"/><stop offset="1" stop-color="#fff"/></linearGradient></defs>
+      <rect width="400" height="170" fill="url(#sk${i})"/>
+      <circle cx="70" cy="42" r="20" fill="#fff6c7" opacity=".9"/>
+      <path d="M0 118 C60 80 120 78 170 104 S250 130 290 120 L400 110 V170 H0Z" fill="#2f8f3a" opacity=".55"/>
+      <path d="M0 132 C80 110 150 112 220 128 S330 140 400 124 V170 H0Z" fill="#49a640"/>
+      ${building}
+      <path d="M0 146 Q50 136 100 146 T200 146 T300 146 T400 146 V170 H0Z" fill="${sea}"/>
+      <path d="M0 156 Q50 148 100 156 T200 156 T300 156 T400 156 V170 H0Z" fill="${deep}"/>
+    </svg>`;
+  }
+
+  const listEl = document.getElementById("list");
+  const sel = { deal: "", dong: "", type: "" };
+  const labels = { deal: "전체 거래", dong: "전체 지역", type: "전체 유형" };
+  let listings = [];
+
+  function render() {
+    const rows = listings.filter(l => Object.entries(sel).every(([k, v]) => !v || l[k] === v));
+    if (!rows.length) {
+      listEl.innerHTML = '<div class="empty">조건에 맞는 매물이 없습니다. 다른 조건을 선택해 보세요 🌊</div>';
+      return;
+    }
+    listEl.innerHTML = rows.map((l, i) => `
+      <article class="card" style="animation-delay:${i * 80}ms">
+        <div class="thumb" ${l.kuula ? `data-url="${esc(l.kuula)}"` : ""}>
+          ${scene(l, i)}
+          <span class="deal ${esc(l.deal)}">${esc(l.deal)}</span>
+          <span class="code-tag">No. ${esc(l.code)}</span>
+          ${l.kuula ? `<span class="vr-pill"><span class="dot"></span>360° VR</span>` : ""}
+        </div>
+        <div class="body">
+          <div class="loc"><svg><use href="#i-pin"/></svg>완도 ${esc(l.dong)}</div>
+          <div class="title">${esc(l.dong)} ${esc(l.type)}</div>
+          <div class="price">${priceHtml(l)}</div>
+          <div class="specs">
+            <div class="spec"><div class="k">대지</div><div class="v">${area(l.land)}</div></div>
+            <div class="spec"><div class="k">건물</div><div class="v">${area(l.bldg)}</div></div>
+            <div class="spec"><div class="k">준공</div><div class="v">${l.year ? esc(l.year) + "년" : "-"}</div></div>
+            <div class="spec"><div class="k">등기</div><div class="v">${esc(l.reg) || "-"}</div></div>
+          </div>
+          ${l.kuula ? `<button class="btn" type="button" data-url="${esc(l.kuula)}"><svg><use href="#i-360"/></svg>360° 현장 둘러보기</button>` : ""}
+        </div>
+      </article>`).join("");
+  }
+
+  function buildChips(key) {
+    const box = document.querySelector(`.chips[data-key="${key}"]`);
+    const values = ["", ...new Set(listings.map(l => l[key]).filter(Boolean))];
+    box.innerHTML = values.map(v =>
+      `<button class="chip${v === sel[key] ? " on" : ""}" type="button" data-v="${esc(v)}">${esc(v || labels[key])}</button>`).join("");
+    box.addEventListener("click", e => {
+      const chip = e.target.closest(".chip");
+      if (!chip) return;
+      sel[key] = chip.dataset.v;
+      box.querySelectorAll(".chip").forEach(c => c.classList.toggle("on", c === chip));
+      render();
+    });
+  }
+
+  function countUp(el, n) {
+    const start = performance.now();
+    (function step(t) {
+      const p = Math.min(1, (t - start) / 900);
+      el.textContent = Math.round(n * (1 - Math.pow(1 - p, 3)));
+      if (p < 1) requestAnimationFrame(step);
+    })(start);
+  }
+
+  const dialog = document.getElementById("viewer");
+  const frame = dialog.querySelector("iframe");
+  listEl.addEventListener("click", e => {
+    const t = e.target.closest("[data-url]");
+    if (!t) return;
+    frame.src = t.dataset.url;
+    dialog.showModal();
+  });
+  dialog.querySelector(".close").addEventListener("click", () => dialog.close());
+  dialog.addEventListener("close", () => { frame.src = "about:blank"; });
+
+  const nav = document.getElementById("nav");
+  const onScroll = () => nav.classList.toggle("scrolled", scrollY > 40);
+  addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+  }), { threshold: .15 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  fetch("listings.json", { cache: "no-store" })
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(data => {
+      listings = data.listings || [];
+      document.getElementById("meta").textContent = `최종 갱신 ${data.updated || "-"} · 총 ${listings.length}건`;
+      countUp(document.getElementById("s-total"), listings.length);
+      countUp(document.getElementById("s-area"), new Set(listings.map(l => l.dong)).size);
+      countUp(document.getElementById("s-vr"), listings.filter(l => l.kuula).length);
+      Object.keys(sel).forEach(buildChips);
+      render();
+    })
+    .catch(err => {
+      document.getElementById("meta").textContent = "매물 데이터를 불러오지 못했습니다. 잠시 후 다시 시도해 주세요.";
+      console.error(err);
+    });
+</script>
+</body>
+</html>
