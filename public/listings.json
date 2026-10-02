@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-01",
+ "updated": "2026-10-02",
  "listings": [
   {
    "code": "02010001",
@@ -123,6 +123,7 @@
    "photos": [
     "public/photos/bfad1539480d.jpg"
    ],
+   "youtube": "https://www.youtube.com/watch?v=8H7PA2vbDNA",
    "deal": "매매",
    "price": 49000,
    "rent": 0,
@@ -178,6 +179,7 @@
    "photos": [
     "public/photos/d42ccfce615c.jpg"
    ],
+   "youtube": "https://www.youtube.com/watch?v=9NdSlyiEWOw&t=1s",
    "deal": "매매",
    "price": 82000,
    "rent": 0,
