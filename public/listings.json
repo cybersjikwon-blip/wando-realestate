@@ -1,5 +1,5 @@
 {
- "updated": "2026-10-02",
+ "updated": "2026-10-06",
  "listings": [
   {
    "code": "02010001",
@@ -123,7 +123,6 @@
    "photos": [
     "public/photos/bfad1539480d.jpg"
    ],
-   "youtube": "https://www.youtube.com/watch?v=8H7PA2vbDNA",
    "deal": "매매",
    "price": 49000,
    "rent": 0,
@@ -179,7 +178,6 @@
    "photos": [
     "public/photos/d42ccfce615c.jpg"
    ],
-   "youtube": "https://www.youtube.com/watch?v=9NdSlyiEWOw&t=1s",
    "deal": "매매",
    "price": 82000,
    "rent": 0,
@@ -238,6 +236,25 @@
    "price": 0,
    "rent": 0,
    "created": "2026-09-30"
+  },
+  {
+   "code": "01190101",
+   "dong": "군외면",
+   "type": "토지",
+   "land": 452,
+   "reg": "등기",
+   "year": 2000,
+   "desc": "전복 축양장입니다. 이곳에서 키워서 바다로 내보내는 과정중에 시작점입니다.",
+   "photos": [
+    "public/photos/b05ecb0fd0d4.jpg",
+    "public/photos/016e82193f62.jpg",
+    "public/photos/7f7811a74f38.jpg",
+    "public/photos/c5aaa1d572fa.jpg"
+   ],
+   "deal": "매매",
+   "price": 32000,
+   "rent": 0,
+   "created": "2026-10-06"
   }
  ],
  "office": {
