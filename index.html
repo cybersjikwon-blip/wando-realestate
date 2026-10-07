@@ -112,6 +112,33 @@ input,select{font:inherit;color:inherit}
 .gal .prev{left:12px}.gal .next{right:12px}
 .gal .num{position:absolute;left:14px;bottom:12px;background:rgba(0,0,0,.55);color:#fff;border-radius:99px;padding:3px 11px;font-size:13px}
 .gal .go360{position:absolute;right:14px;bottom:12px;border:2px solid #fff;border-radius:99px;padding:9px 16px;font-weight:900;color:var(--deep);background:var(--nacre);box-shadow:0 6px 16px rgba(0,0,0,.3)}
+.dnav{position:sticky;top:0;z-index:6;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;background:#fff;border-bottom:1px solid var(--line);padding:8px 14px}
+.dnav::-webkit-scrollbar{display:none}.dnav button{flex:none;border:0;background:none;padding:8px 12px;border-radius:99px;font-weight:700;font-size:14px;color:var(--sub)}
+.dnav button.on{background:var(--ink);color:#fff}
+.dsec{scroll-margin-top:70px;margin-top:34px}.dsec>h3{font-family:"Do Hyeon";font-weight:400;font-size:24px;margin:0 0 12px}
+.mm{position:relative;height:260px;border-radius:14px;overflow:hidden;background:#DDE6EA;border:1px solid var(--line)}
+.mm>div.mapc{position:absolute!important;inset:0;width:100%!important;height:100%!important}
+.mm .mmBtn{position:absolute;right:10px;top:10px;z-index:700;border:0;border-radius:10px;background:#fff;padding:8px 12px;font-weight:700;font-size:13px;box-shadow:0 3px 10px rgba(0,0,0,.18)}
+.mm.big{position:fixed;inset:0;z-index:3000;height:auto;border-radius:0;border:0}
+.mmNote{font-size:12.5px;color:var(--sub);margin:6px 2px 0}
+.near{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.near div{background:var(--bg);border-radius:12px;padding:10px 12px;font-size:13.5px}.near div b{display:block;font-size:12px;color:var(--sub);font-weight:500}
+.near div.none{opacity:.55}
+.ferry{display:flex;gap:10px;align-items:center;margin-top:10px;background:#E8F3F6;border-radius:12px;padding:12px 14px;font-size:14px}
+.calc{border:1px solid var(--line);border-radius:14px;padding:16px}
+.calc .in{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}.calc label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--sub)}
+.calc input{border:1px solid var(--line);border-radius:10px;padding:9px 10px;width:160px;font-size:15px}
+.calc table{width:100%;border-collapse:collapse;font-size:14.5px}.calc td{padding:9px 4px;border-bottom:1px solid var(--line)}.calc td:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.calc tr.tot td{font-weight:900;font-size:17px;color:var(--coral-d);border-bottom:0}
+.calc small{display:block;color:var(--mute);font-size:12px;line-height:1.6;margin-top:8px}
+.story{display:flex;gap:14px;align-items:center;background:linear-gradient(120deg,#F1ECE6,#E9F0EC);border-radius:16px;padding:18px}
+.story b{font-family:"Do Hyeon";font-size:22px;font-weight:400}.story p{margin:4px 0 0;color:var(--sub);font-size:14px}
+.simRow{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(200px,230px);gap:12px;overflow-x:auto;padding:2px 2px 10px;scrollbar-width:thin}
+.simT{font-weight:700;margin:16px 0 8px;font-size:15px}
+.book{border:1px solid var(--line);border-radius:14px;padding:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:flex-end}
+.book label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--sub)}.book input,.book select{border:1px solid var(--line);border-radius:10px;padding:9px 10px;font-size:15px}
+.gal img{transition:opacity .35s}
+@media (max-width:720px){#areaAlert{display:none}.near{grid-template-columns:1fr 1fr}.mm{height:220px}.calc input{width:100%}.calc .in label{flex:1}}
 .mtabs{display:flex;gap:6px;padding:10px 12px;background:#0F2233}
 .mtabs button{border:1px solid rgba(255,255,255,.25);background:transparent;color:#fff;border-radius:99px;padding:7px 14px;font-weight:700;font-size:13.5px}
 .mtabs button.on{background:var(--coral);border-color:var(--coral)}
@@ -696,17 +723,18 @@ function detail(code){const x=ALL.find(y=>String(y.code)===String(code));if(x)RE
     ${(()=>{const ph=x.photos||[],tabs=[];if(ph.length)tabs.push(["ph","📷 사진 "+ph.length]);if(x.kuula)tabs.push(["vr","360° VR"]);if(ytId(x.youtube))tabs.push(["yt","▶ 유튜브 영상"]);
       return `${tabs.length>1?`<div class="mtabs">${tabs.map(t=>`<button data-mt="${t[0]}">${t[1]}</button>`).join("")}</div>`:""}<div id="mview"></div>
       ${ph.length>1?`<div class="strip" id="strip">${ph.map((u,i)=>`<img src="${esc(photoUrl(u))}" data-gi="${i}" class="${i?"":"on"}" alt="" loading="lazy">`).join("")}</div>`:""}`})()}
-    <div class="body"><div>${x.feat?`<span class="tags"><i class="c">${esc(x.feat.badge||"추천")}</i></span>`:""}
+    <nav class="dnav" id="dnav">${[["sInfo","매물 정보"],["sLoc","위치·주변"],["sCost","비용 계산"],["sStory","섬 이야기"],["sSim","비슷한 매물"],["sAsk","방문 예약"]].map(([k,t],i)=>`<button data-sec="${k}" class="${i?"":"on"}">${t}</button>`).join("")}</nav>
+    <div class="body"><div><div id="sInfo" class="dsec" style="margin-top:0"></div>${x.feat?`<span class="tags"><i class="c">${esc(x.feat.badge||"추천")}</i></span>`:""}
       <h2>${esc(title(x))}</h2><div style="color:var(--sub)">${esc(x.dong||"")} ${esc(x.type||"")} · ${esc(area(x))}</div>
       ${x.feat?.headline?`<p style="font-weight:700;font-size:17px;margin:14px 0 0">${esc(x.feat.headline)}</p>`:""}
-      <dl class="facts">${fact("거래유형",x.deal)}${fact("물건유형",x.type)}${fact("대지면적",x.land&&`${x.land}평 (${(x.land*3.3058).toFixed(1)}㎡)`)}${fact("건물면적",x.bldg&&`${x.bldg}평 (${(x.bldg*3.3058).toFixed(1)}㎡)`)}${fact("등기",x.reg)}${fact("건축년도",x.year&&x.year+"년")}${fact("지목",x.jimok)}${fact("도로",x.roadAccess)}${x.dong?`<div><dt>소재지</dt><dd>전라남도 완도군 ${esc(x.dong)}<a class="mapLink" href="#/map?focus=${encodeURIComponent(x.code)}">📍 지도 위치보기</a></dd></div>`:""}${fact("평당 가격",perPy(x).replace("평당 ",""))}${fact("등록",x.created&&`${x.created} (${agoTxt(x.created)})`)}</dl>
+      <dl class="facts">${fact("거래유형",x.deal)}${fact("물건유형",x.type)}${fact("대지면적",x.land&&`${x.land}평 (${(x.land*3.3058).toFixed(1)}㎡)`)}${fact("건물면적",x.bldg&&`${x.bldg}평 (${(x.bldg*3.3058).toFixed(1)}㎡)`)}${fact("등기",x.reg)}${fact("건축년도",x.year&&x.year+"년")}${fact("지목",x.jimok)}${fact("도로",x.roadAccess)}${x.dong?`<div><dt>소재지</dt><dd>전라남도 완도군 ${esc(x.dong)}<a class="mapLink" href="#" data-sec="sLoc">📍 지도 위치보기</a></dd></div>`:""}${fact("평당 가격",perPy(x).replace("평당 ",""))}${fact("등록",x.created&&`${x.created} (${agoTxt(x.created)})`)}</dl>
       ${x.desc?`<div class="desc">${esc(x.desc)}</div>`:""}${x.reg&&x.reg!=="등기"?`<p style="color:#B36A00;font-size:13.5px">※ ${esc(x.reg)} 건물이 있는 매물입니다. 계약 전 현황과 절차를 자세히 안내해 드립니다.</p>`:""}
-      ${(()=>{const sim=ALL.filter(y=>y.code!==x.code&&(y.dong===x.dong||y.type===x.type)).sort((a,b)=>(b.dong===x.dong)-(a.dong===x.dong)).slice(0,3);return sim.length?`<div class="similar"><h3>비슷한 매물</h3><div class="grid4">${sim.map(miniCard).join("")}</div></div>`:""})()}</div>
+      ${detailSections(x)}</div>
      <aside class="aside"><b class="dh" style="font-size:22px">${esc(OFF.name)}</b><small style="margin-top:2px">대표 ${esc(OFF.rep||"-")} · 등록번호 ${esc(OFF.regno||"-")}</small>
       ${tel?`<a class="btn c" href="tel:${tel}">📞 ${esc(OFF.tel)} 전화하기</a><a class="btn o" href="sms:${tel}?body=${encodeURIComponent(`[매물 ${x.code}] 문의드립니다.`)}">문자로 문의</a>`:`<a class="btn c" href="#/contact">문의하기</a>`}
-      <button class="btn o" id="share">공유하기</button><small>매물번호 <b>${esc(x.code)}</b>를 말씀해 주시면 바로 안내해 드립니다.${UPDATED?`<br>정보 기준일 ${esc(UPDATED)}`:""}</small></aside></div></div>`}
+      <button class="btn o" id="share">공유하기</button><button class="btn o" id="areaAlert">🔔 ${esc(x.dong||"이 지역")} 새 매물 알림</button><small>매물번호 <b>${esc(x.code)}</b>를 말씀해 주시면 바로 안내해 드립니다.${UPDATED?`<br>정보 기준일 ${esc(UPDATED)}`:""}</small></aside></div></div>`}
   document.body.appendChild(wrap);document.body.style.overflow="hidden";
-  const close=()=>{wrap.remove();document.body.style.overflow=""};wrap._close=close;
+  const close=()=>{wrap._cleanup&&wrap._cleanup();wrap.remove();document.body.style.overflow=""};wrap._close=close;
   wrap.addEventListener("click",e=>{if(e.target===wrap||e.target.closest(".x"))back()});
   const ph=x.photos||[],yt=ytId(x.youtube);let gi=0;
   const view=t=>{const v=wrap.querySelector("#mview"),st=wrap.querySelector("#strip");if(st)st.hidden=t!=="ph";
@@ -717,8 +745,19 @@ function detail(code){const x=ALL.find(y=>String(y.code)===String(code));if(x)RE
     else{v.className="tour";v.innerHTML=`<div class="play" style="cursor:default">${illOf(x.type).replace('class="ill"','style="width:40%;opacity:.8"')}<span>사진·영상 준비 중입니다</span></div>`}};
   const show=i=>{if(!ph.length)return;gi=(i+ph.length)%ph.length;const im=wrap.querySelector("#galImg");if(im)im.src=photoUrl(ph[gi]);const n=wrap.querySelector("#galNum");if(n)n.textContent=`${gi+1} / ${ph.length}`;
     wrap.querySelectorAll(".strip img").forEach((m,k)=>m.classList.toggle("on",k===gi))};
-  view(ph.length?"ph":x.kuula?"vr":yt?"yt":"none");
-  wrap.addEventListener("click",e=>{const mt=e.target.closest("[data-mt]");if(mt)view(mt.dataset.mt);const b=e.target.closest("[data-g]");if(b)show(gi+ +b.dataset.g);const t=e.target.closest("[data-gi]");if(t)show(+t.dataset.gi)});
+  let curTab=ph.length?"ph":x.kuula?"vr":yt?"yt":"none",pauseUntil=0,hover=false;const vv=view;
+  const view2=t=>{curTab=t;vv(t)};view2(curTab);
+  ph.slice(0,20).forEach(u=>{const im=new Image();im.src=photoUrl(u)});            // 미리 받아 두어 깜빡임 없이 넘김
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const auto=setInterval(()=>{if(!document.body.contains(wrap)){clearInterval(auto);return}
+    if(curTab!=="ph"||ph.length<2||document.hidden||hover||wrap.querySelector("#mview:hover")||reduce||Date.now()<pauseUntil)return;
+    const g=wrap.querySelector("#mview");if(g){const r=g.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return}   // 화면 밖이면 쉼
+    const im=wrap.querySelector("#galImg");if(im){im.style.opacity=.15;setTimeout(()=>{show(gi+1);im.style.opacity=1},180)}},1500);
+  const mv=wrap.querySelector("#mview");if(mv){mv.addEventListener("mouseenter",()=>hover=true);mv.addEventListener("mouseleave",()=>hover=false);
+    let sx=null;mv.addEventListener("touchstart",e=>{sx=e.touches[0].clientX;pauseUntil=Date.now()+5000},{passive:true});
+    mv.addEventListener("touchend",e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40&&curTab==="ph")show(gi+(dx<0?1:-1));sx=null;pauseUntil=Date.now()+5000},{passive:true})}
+  const unwire=wireDetail(x,wrap);wrap._cleanup=()=>{clearInterval(auto);unwire&&unwire()};
+  wrap.addEventListener("click",e=>{const mt=e.target.closest("[data-mt]");if(mt)view2(mt.dataset.mt);const b=e.target.closest("[data-g]");if(b){show(gi+ +b.dataset.g);pauseUntil=Date.now()+5000}const t=e.target.closest("[data-gi]");if(t){show(+t.dataset.gi);pauseUntil=Date.now()+5000}});
   const sh=wrap.querySelector("#share");if(sh)sh.onclick=async()=>{const u=location.href;if(navigator.share){try{await navigator.share({title:`${OFF.name} 매물 ${x.code}`,text:`${x.dong||""} ${x.type||""} ${title(x)}`,url:u});return}catch(e){}}
     try{await navigator.clipboard.writeText(u);toast("링크를 복사했습니다")}catch(e){prompt("링크를 복사하세요",u)}}}
 function miniCard(x){return `<a class="mini" href="#/m/${encodeURIComponent(x.code)}">${thumb(x)}<div class="in"><div class="pr">${esc(title(x))}${isNew(x)?'<span class="new">NEW</span>':""}</div><div class="mt">${esc(x.dong||"")} ${esc(x.type||"")} · ${esc(area(x))}</div><div class="ex"><span>${esc(perPy(x)||x.jimok||"")}</span><span>${esc(agoTxt(x.created))}</span></div></div></a>`}
@@ -776,6 +815,80 @@ function franchisePage(){const tel=(OFF.tel||"").replace(/[^0-9]/g,"");
    <div class="step"><div><b>상담</b><p style="margin:4px 0 0;color:var(--sub)">지역·운영 방식 안내</p></div><div><b>교육</b><p style="margin:4px 0 0;color:var(--sub)">드론·VR·매물 등록 실습</p></div><div><b>장비·시스템 준비</b><p style="margin:4px 0 0;color:var(--sub)">관리 프로그램·홈페이지 세팅</p></div><div><b>오픈·지원</b><p style="margin:4px 0 0;color:var(--sub)">첫 매물 촬영부터 함께</p></div></div>
    <section class="cta">${SHELL}<h3>가맹 상담 신청</h3><p>궁금한 점을 편하게 물어보세요. 운영 사례와 실제 촬영 영상을 함께 보여드립니다.</p>
     <div class="btns">${tel?`<a class="btn c" href="tel:${tel}">📞 ${esc(OFF.tel)}</a><a class="btn w" href="sms:${tel}?body=${encodeURIComponent("[체인점 문의] 지역: / 성함: / 연락처:")}">문자로 상담 신청</a>`:'<a class="btn c" href="#/contact">문의하기</a>'}${OFF.youtube?`<a class="btn y" href="${esc(OFF.youtube)}" target="_blank" rel="noopener">▶ 운영 영상 보기</a>`:""}</div></section></div>`}
+
+/* ================= 상세 페이지 구성 ================= */
+const NEAR=[["nearPort","⛴️","선착장·배편"],["nearMart","🛒","마트·편의점"],["nearHospital","🏥","병원·보건소"],["nearSchool","🏫","학교"],["nearBeach","🏖️","바다·해수욕장"],["nearBus","🚌","버스"]];
+const FERRY_ISLES=["노화읍","보길면","소안면","청산면","금일읍","생일면","금당면"];
+const isHouse=x=>["주택","전원주택","아파트","빌라"].includes(x.type);
+const isExact=x=>(x.loc==="정확"||x.loc==="exact")&&x.lat&&x.lng;
+function detailSections(x){const isle=EMD[x.dong]||null,ferry=FERRY_ISLES.includes(x.dong),rent=isRent(x);
+  const same=ALL.filter(y=>y.code!==x.code&&y.dong===x.dong).sort(sortNew).slice(0,10);
+  const pr=+x.price||0,near=ALL.filter(y=>y.code!==x.code&&y.deal===x.deal&&pr&&(+y.price||0)>=pr*.7&&(+y.price||0)<=pr*1.3&&!same.includes(y)).slice(0,10);
+  return `<section class="dsec" id="sLoc"><h3>위치·주변</h3>
+    <div class="mm" id="mm"><div class="mapc" id="mmap"></div><button class="mmBtn" id="mmBig" type="button">⤢ 크게 보기</button></div>
+    <p class="mmNote">${isExact(x)?"표시된 위치는 실제 매물 위치입니다.":"집 위치 보호를 위해 대략적인 범위로 표시합니다. 정확한 위치는 상담 때 안내해 드립니다."} <a href="#/map?focus=${encodeURIComponent(x.code)}" style="color:var(--coral-d)">전체 지도에서 보기 ›</a></p>
+    <div class="near">${NEAR.map(([k,i,t])=>`<div class="${x[k]?"":"none"}"><b>${i} ${t}</b>${esc(x[k]||"문의 시 안내")}</div>`).join("")}</div>
+    ${ferry?`<div class="ferry">⛴️<span><b>${esc(x.dong)}</b>은(는) 배로 오가는 섬입니다. 배편 시간과 선착장 거리를 꼭 확인하세요. <a href="https://island.haewoon.co.kr" target="_blank" rel="noopener" style="color:var(--coral-d);font-weight:700">여객선 운항 정보 ›</a></span></div>`:""}</section>
+   <section class="dsec" id="sCost"><h3>${rent||x.deal==="전세"?"입주 비용 계산":"구입 비용 계산"}</h3><div class="calc" id="calc">
+    <div class="in"><label>${rent?"보증금 (만원)":x.deal==="전세"?"전세금 (만원)":"매매가 (만원)"}<input type="number" inputmode="numeric" id="cP" value="${esc(x.price||"")}"></label>
+     ${rent?`<label>${x.deal==="월세"?"월세":"연세"} (만원)<input type="number" inputmode="numeric" id="cR" value="${esc(x.rent||"")}"></label>`:""}</div><div id="cOut"></div>
+    <small>${rent||x.deal==="전세"?"중개보수는 법정 상한 기준이며 협의할 수 있습니다(부가세 별도).":"1주택·일반 기준의 대략적인 금액입니다. 다주택, 생애최초·감면, 조정지역 등에 따라 달라질 수 있고, 중개보수는 법정 상한(협의 가능, 부가세 별도)입니다."} 정확한 금액은 상담 때 안내해 드립니다.</small></div></section>
+   ${isle?`<section class="dsec" id="sStory"><h3>섬 이야기</h3><a class="story" href="#/life"><div style="font-size:40px">${ferry?"🏝️":"🌊"}</div><div><b>${esc(x.dong)}</b><p>${esc(isle.t)} · ${esc(isle.s)}</p><p>${ferry?"배로 오가는 섬 — 한적한 섬살이":"다리로 이어진 생활권 — 차로 오갈 수 있어요"} · 완도 섬 생활 더 보기 ›</p></div></a></section>`:'<div id="sStory"></div>'}
+   <section class="dsec" id="sSim"><h3>비슷한 매물</h3>
+    ${same.length?`<div class="simT">${esc(x.dong)}의 다른 매물 ${same.length}건</div><div class="simRow">${same.map(miniCard).join("")}</div>`:""}
+    ${near.length?`<div class="simT">비슷한 가격대 (${esc(x.deal)} ${won(pr*.7)}~${won(pr*1.3)})</div><div class="simRow">${near.map(miniCard).join("")}</div>`:""}
+    ${!same.length&&!near.length?'<p style="color:var(--sub)">비슷한 매물이 곧 올라옵니다. <a href="#/map" style="color:var(--coral-d)">전체 매물 보기 ›</a></p>':""}
+    <button class="btn o" type="button" data-aalert style="margin-top:10px">🔔 ${esc(x.dong||"이 지역")} ${esc(x.type||"")} 새 매물이 올라오면 알림 받기</button></section>
+   <section class="dsec" id="sAsk"><h3>방문 예약</h3><div class="book">
+    <label>희망 날짜<input type="date" id="bkD" min="${new Date().toISOString().slice(0,10)}"></label>
+    <label>시간<select id="bkT"><option>오전 (9~12시)</option><option>오후 (1~5시)</option><option>시간 협의</option></select></label>
+    <label>인원<select id="bkN"><option>1명</option><option selected>2명</option><option>3명 이상</option></select></label>
+    <label>성함<input id="bkName" placeholder="예: 홍길동" autocomplete="name"></label>
+    <button class="btn c" type="button" id="bkGo">문자로 예약하기</button></div>
+    <p class="mmNote">배편·물때에 따라 방문 시간을 조정해 드릴 수 있습니다.</p></section>`}
+function costRows(x,P,Rm){const rows=[],house=isHouse(x),m=v=>v<=0?"0원":v<1?Math.round(v*10000).toLocaleString("ko-KR")+"원":won(Math.round(v))+(Math.round(v)%10000?"원":"원");
+  if(!P&&!Rm)return '<p style="color:var(--sub)">금액을 입력하면 계산됩니다.</p>';
+  const tbl=(rs,tot)=>`<table>${rs.map(([k,v])=>`<tr><td>${k}</td><td>${m(v)}</td></tr>`).join("")}<tr class="tot"><td>합계 (대략)</td><td>${m(tot)}</td></tr></table>`;
+  if(x.deal==="매매"){let rate=house?(P<=60000?1:P<=90000?(P/10000)*2/3-3:3):4;rate=Math.max(1,Math.min(rate,4));
+    const tax=P*rate/100,edu=house?tax*.1:P*.004,big=house?((+x.bldg||0)*3.3058>85):true,farm=big?P*.002:0;
+    const fee=house?(P<5000?Math.min(P*.006,25):P<20000?Math.min(P*.005,80):P<90000?P*.004:P<120000?P*.005:P<150000?P*.006:P*.007):P*.009;
+    rows.push(["매매가",P],[`취득세 (${rate.toFixed(2).replace(/\.?0+$/,"")}%)`,tax],["지방교육세",edu]);if(farm)rows.push(["농어촌특별세",farm]);rows.push([house?"중개보수 (상한)":"중개보수 (0.9% 이내 협의)",fee]);
+    return tbl(rows,P+tax+edu+farm+fee)}
+  const monthly=x.deal==="월세"?Rm:x.deal==="연세"?Rm/12:0;let base=P+monthly*100;if(monthly&&base<5000)base=P+monthly*70;
+  const fee=house?(base<5000?Math.min(base*.005,20):base<10000?Math.min(base*.004,30):base<60000?base*.003:base<120000?base*.004:base<150000?base*.005:base*.006):base*.009;
+  rows.push([x.deal==="전세"?"전세금":"보증금",P]);if(x.deal==="월세")rows.push(["월세 1년치",Rm*12]);if(x.deal==="연세")rows.push(["연세 (1년)",Rm]);rows.push(["중개보수 (상한)",fee]);
+  return tbl(rows,P+(x.deal==="월세"?Rm*12:x.deal==="연세"?Rm:0)+fee)}
+let NV_LOADING=null;
+function ensureNaver(){if(window.naver?.maps)return Promise.resolve(true);if(!CFG.NAVER_KEY)return Promise.resolve(false);
+  if(!NV_LOADING)NV_LOADING=new Promise(ok=>{let done=false;const fin=v=>{if(!done){done=true;ok(v)}};window.navermap_authFailure=()=>fin(false);
+    const sc=document.createElement("script");sc.dataset.nv=1;sc.src=`https://oapi.map.naver.com/openapi/v3/maps.js?ncpKeyId=${encodeURIComponent(CFG.NAVER_KEY)}`;sc.onload=()=>setTimeout(()=>fin(!!window.naver?.maps),300);sc.onerror=()=>fin(false);setTimeout(()=>fin(!!window.naver?.maps),8000);document.head.appendChild(sc)});
+  return NV_LOADING}
+async function miniMap(x,el){const p=posOf(x),exact=isExact(x),z=exact?16:14;
+  try{if(await ensureNaver()){const c=new naver.maps.LatLng(p[0],p[1]),m=new naver.maps.Map(el,{center:c,zoom:z,scrollWheel:false,zoomControl:true,zoomControlOptions:{position:naver.maps.Position.TOP_LEFT},mapDataControl:false});
+      exact?new naver.maps.Marker({position:c,map:m}):new naver.maps.Circle({map:m,center:c,radius:350,fillColor:"#FF5A36",fillOpacity:.15,strokeColor:"#FF5A36",strokeWeight:2});
+      return {resize(){try{m.setSize(new naver.maps.Size(el.clientWidth,el.clientHeight));m.setCenter(c)}catch(e){}}}}}catch(e){}
+  if(window.L){const m=L.map(el,{scrollWheelZoom:false,maxZoom:17}).setView(p,z);L.tileLayer("https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}",{maxZoom:17,attribution:"지도 © Esri"}).addTo(m);
+    exact?L.marker(p).addTo(m):L.circle(p,{radius:350,color:"#FF5A36",fillOpacity:.15}).addTo(m);setTimeout(()=>m.invalidateSize(),150);return {resize(){m.invalidateSize();m.setView(p,m.getZoom())}}}
+  el.innerHTML='<p style="padding:20px;color:var(--sub)">지도를 불러오지 못했습니다.</p>';return null}
+function wireDetail(x,wrap){
+  const out=wrap.querySelector("#cOut"),cP=wrap.querySelector("#cP"),cR=wrap.querySelector("#cR");
+  const calc=()=>{if(out)out.innerHTML=costRows(x,+(cP?.value||0),+(cR?.value||0))};calc();[cP,cR].forEach(i=>i&&i.addEventListener("input",calc));
+  const mmEl=wrap.querySelector("#mmap");let mm=null;
+  const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)&&!mm){io.disconnect();miniMap(x,mmEl).then(h=>mm=h)}},{root:wrap,rootMargin:"300px"});if(mmEl)io.observe(mmEl);
+  const big=wrap.querySelector("#mmBig");if(big)big.onclick=()=>{const box=wrap.querySelector("#mm"),on=box.classList.toggle("big");big.textContent=on?"✕ 닫기":"⤢ 크게 보기";
+    if(!mm)miniMap(x,mmEl).then(h=>{mm=h;h&&setTimeout(()=>h.resize(),80)});else[60,300].forEach(t=>setTimeout(()=>mm&&mm.resize(),t))};
+  const secs=["sInfo","sLoc","sCost","sStory","sSim","sAsk"].map(id=>wrap.querySelector("#"+id)).filter(Boolean);
+  const so=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)wrap.querySelectorAll("[data-sec]").forEach(b=>b.classList.toggle("on",b.dataset.sec===e.target.id&&b.closest(".dnav")))})},{root:wrap,rootMargin:"-30% 0px -60% 0px"});secs.forEach(s=>so.observe(s));
+  wrap.addEventListener("click",e=>{const b=e.target.closest("[data-sec]");if(b){e.preventDefault();const t=wrap.querySelector("#"+b.dataset.sec);if(t)t.scrollIntoView({behavior:"smooth",block:"start"})}});
+  const addAA=()=>ALERTS.add({...F0(),dongs:x.dong?[x.dong]:[],types:x.type?[x.type]:[]});
+  const aa=wrap.querySelector("#areaAlert");if(aa)aa.onclick=addAA;wrap.addEventListener("click",e=>{if(e.target.closest("[data-aalert]"))addAA()});
+  const bk=wrap.querySelector("#bkGo");if(bk)bk.onclick=()=>{const d=wrap.querySelector("#bkD").value,tel=(OFF.tel||"").replace(/[^0-9]/g,"");
+    if(!d){toast("방문 희망 날짜를 골라 주세요");wrap.querySelector("#bkD").focus();return}
+    const body=`[방문 예약] 매물 ${x.code} (${x.dong||""} ${x.type||""})\n날짜: ${d} ${wrap.querySelector("#bkT").value}\n인원: ${wrap.querySelector("#bkN").value}\n성함: ${wrap.querySelector("#bkName").value||"-"}`;
+    if(tel){location.href=`sms:${tel}?body=${encodeURIComponent(body)}`;return}
+    const done=()=>toast("예약 내용을 복사했습니다. 문의 페이지의 연락처로 보내주세요");
+    (navigator.clipboard?navigator.clipboard.writeText(body):Promise.reject()).then(done).catch(()=>{try{prompt("아래 예약 내용을 복사해 보내주세요",body)}catch(e){}})};
+  return ()=>{io.disconnect();so.disconnect()}}
 
 /* ================= 서브 페이지 ================= */
 const head=(t,p)=>`<section class="pageHead"><div class="wrap"><h1>${t}</h1><p>${p}</p></div></section>`;
