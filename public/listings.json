@@ -258,6 +258,25 @@
    "price": 32000,
    "rent": 0,
    "created": "2026-10-06"
+  },
+  {
+   "code": "01200101",
+   "dong": "완도읍",
+   "land": 31,
+   "bldg": 18,
+   "reg": "등기",
+   "year": 2008,
+   "photos": [
+    "public/photos/a62db6e063f7.jpg",
+    "public/photos/3a535ed76964.jpg",
+    "public/photos/de52596e0cc2.jpg"
+   ],
+   "youtube": "https://www.youtube.com/watch?v=MV00BrS7qz8",
+   "deal": "매매",
+   "price": 9800,
+   "rent": 0,
+   "created": "2026-10-07",
+   "kuula": "https://kuula.co/share/collection/7dGCx?logo=1&info=0&logosize=103&fs=1&vr=0&zoom=1&gyro=0&initload=0&thumbs=0"
   }
  ],
  "office": {
