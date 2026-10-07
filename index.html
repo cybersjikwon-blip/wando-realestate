@@ -511,7 +511,7 @@ function renderFooter(){$("#ft").innerHTML=`<div class="wrap in">
   <div><b class="dh" style="font-size:22px">완도 섬 부동산</b><p style="margin:8px 0 0;line-height:1.8">섬에서 살아가는 삶, 전원주택의 여유,<br>바다와 함께하는 귀어·귀농의 꿈을 함께 찾습니다.</p></div>
   <div><b>바로가기</b><ul><li><a href="#/map">매물 지도</a></li><li><a href="#/pick">추천 매물</a></li><li><a href="#/life">완도 섬 생활</a></li><li><a href="#/guide">매매 가이드</a></li><li><a href="#/contact">매물 의뢰·문의</a></li></ul></div>
   <div><b>채널</b><ul>${OFF.youtube?`<li><a href="${esc(OFF.youtube)}" target="_blank" rel="noopener">유튜브</a></li>`:""}${OFF.cafe?`<li><a href="${esc(OFF.cafe)}" target="_blank" rel="noopener">네이버 카페</a></li>`:""}<li><a href="#/fav">관심 목록</a></li></ul></div>
-  <div class="legal">상호 ${esc(OFF.name)} · 대표 ${esc(OFF.rep||"-")} · 중개사무소 등록번호 ${esc(OFF.regno||"-")}<br>소재지 ${esc(OFF.addr||"-")} · 전화 ${esc(OFF.tel||"-")}${UPDATED?` · 매물 정보 기준일 ${esc(UPDATED)}`:""}<br>게시된 매물 정보는 실제와 다를 수 있으니 방문·계약 전 반드시 확인해 주세요.</div></div>`}
+  <div class="legal"><span style="float:right;opacity:.6">홈페이지 v37</span>상호 ${esc(OFF.name)} · 대표 ${esc(OFF.rep||"-")} · 중개사무소 등록번호 ${esc(OFF.regno||"-")}<br>소재지 ${esc(OFF.addr||"-")} · 전화 ${esc(OFF.tel||"-")}${UPDATED?` · 매물 정보 기준일 ${esc(UPDATED)}`:""}<br>게시된 매물 정보는 실제와 다를 수 있으니 방문·계약 전 반드시 확인해 주세요.</div></div>`}
 
 /* ================= 홈 ================= */
 function fishes(){let h="";const F='<svg viewBox="0 0 64 32" width="W"><path d="M2 16C12 4 30 2 44 10l14-8v28l-14-8C30 30 12 28 2 16z"/><circle cx="14" cy="14" r="2" fill="#0F2233"/></svg>';
